@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script>
+    const ROOM_ID = "<%= roomId %>"
+    localStorage.setItem('id',ROOM_ID)
+  </script>
+  <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="script.js" defer></script>
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+           
+
+  <title>Document</title>
+  <style>
+    #video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 300px);
+      grid-auto-rows: 300px;
+    }
+    
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 20px;
+      border-radius: 30px;
+    }
+    .link{
+        align-self: center ;
+        width: 100%;
+        height: 70px;
+        border-spacing: 20px;
+        align-items: center;
+        color: black;
+        font-size: large;
+        border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+    <nav>
+    <div class="nav-wrapper cyan darken-4">
+        <a href="#" class="brand-logo center">Video Conference</a>
+    </div>
+</nav><br>
+<button class="btn red center waves-effect waves-teal btn-flat link " onclick="textToClipboard('hello')">
+    <p id="output"></p>
+</button>
+<div id="video-grid" class="video-container responsive-video"></div>
+</body>
+
+<script>
+    window.onload = function(){
+        const id= localStorage.getItem('id')
+        document.getElementById('output').innerHTML = 'click to copy room ID  ' + id;
+};
+
+function textToClipboard (text) {
+    text=localStorage.getItem('id');
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+}
+    
+</script>
+</html>
